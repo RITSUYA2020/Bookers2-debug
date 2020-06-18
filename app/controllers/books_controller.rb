@@ -5,7 +5,9 @@ before_action :ensure_current_user, {only: [:edit]}
   def show
   	@book = Book.find(params[:id])
     @user = @book.user
+    @book_comments = @book.book_comments
     @new_book = Book.new
+    @new_book_comment = BookComment.new
   end
 
   def index
