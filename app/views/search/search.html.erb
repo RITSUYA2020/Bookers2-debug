@@ -1,0 +1,43 @@
+<% if @target == "User" %>
+	<% @users.each do |user| %>
+		<h2>Users search for "<%= user.name %>"</h2>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>image</th>
+					<th>name</th>
+					<th colspan="3"></th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr>
+					<td><%= attachment_image_tag(user, :profile_image, :fill, 50, 50, fallback: "no-image-mini.jpg") %></td>
+					<td><%= user.name %></td>
+					<td><%= link_to "Show", user, class: "user_#{user.id}" %></td>
+				</tr>
+			</tbody>
+		</table>
+	<% end %>
+<% elsif @target == "Book" %>
+	<% @books.each do |book| %>
+		<h2>Books search for "<%= book.title %>"</h2>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>image</th>
+					<th>name</th>
+					<th colspan="3"></th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr>
+					<td><%= attachment_image_tag(book.user, :profile_image, :fill, 50, 50, fallback: "no-image-mini.jpg") %></td>
+					<td><%= book.title %></td>
+					<td><%= link_to "Show", book, class: "book_#{book.id}" %></td>
+				</tr>
+			</tbody>
+		</table>
+	<% end %>
+<% end %>

@@ -10,4 +10,17 @@ class User < ApplicationRecord
   #バリデーションは該当するモデルに設定する。エラーにする条件を設定できる。
   validates :name, length: { in: 2..20 }
   validates :introduction, length: {maximum: 50}
+
+	def self.search(method, word)
+		if method == "perfect_match"
+			User.where(name: word)
+		elsif method == "forward_match"
+			User.where("name LIKE ?", "#{word}%")
+		elsif method == "backward_match"
+			User.where("name LIKE ?", "%#{word}")
+		elsif method == "partial_match"
+			User.where("name LIKE ?", "%#{word}%")
+		end
+	end
+
 end
