@@ -9,7 +9,6 @@ class BookCommentsController < ApplicationController
 		@new_book_comment.book_id = @book.id
 		if @new_book_comment.save
 			flash[:success] = "Comment was successfully created."
-			redirect_to book_path(@book)
 		else
 			@book_comments = @book.book_comments
 			@user = current_user
@@ -21,7 +20,7 @@ class BookCommentsController < ApplicationController
 	def destroy
 		comment = BookComment.find(params[:id])
 		comment.destroy
-		redirect_to book_path(comment.book_id)
+		@new_book_comments = BookComment.where(book_id: params[:book_id])
 	end
 
 	private
